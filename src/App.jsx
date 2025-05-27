@@ -68,9 +68,11 @@ function InflationCalculator() {
     const newResults = Array.from({ length: years }, (_, i) => {
       const year = new Date().getFullYear() + i
       const calculatedAmount = initialAmount * Math.pow(1 - rate, i + 1)
+      const futureValue = initialAmount * Math.pow(1 + rate, i + 1)
       return {
         year,
         amount: calculatedAmount.toFixed(2),
+        futureValue: futureValue.toFixed(2),
       }
     })
 
@@ -129,13 +131,15 @@ function InflationCalculator() {
               <TableRow>
                 <TableHead>{t("table.year")}</TableHead>
                 <TableHead className="text-right">{t("table.amount")}</TableHead>
+                <TableHead className="text-right">{t("table.futureValue")}</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
-              {results.map(({ year, amount }) => (
+              {results.map(({ year, amount, futureValue }) => (
                 <TableRow key={year}>
                   <TableCell>{year}</TableCell>
                   <TableCell className="text-right">{amount}</TableCell>
+                  <TableCell className="text-right">{futureValue}</TableCell>
                 </TableRow>
               ))}
             </TableBody>
