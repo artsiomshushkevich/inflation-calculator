@@ -1,5 +1,7 @@
 # React + Vite
 
+> ⚠️ **Warning**: This application is vibecoded™ - meaning the code quality might smell like a dumpster fire on a hot summer day. Proceed with caution and a strong sense of humor!
+
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
 Currently, two official plugins are available:
