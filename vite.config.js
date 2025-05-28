@@ -11,13 +11,4 @@ export default defineConfig({
   define: {
     __BUILD_SALT__: JSON.stringify(buildSalt),
   },
-  build: {
-    rollupOptions: {
-      output: {
-        entryFileNames: `assets/[name]-[hash]-${buildSalt}.js`,
-        chunkFileNames: `assets/[name]-[hash]-${buildSalt}.js`,
-        assetFileNames: `assets/[name]-[hash]-${buildSalt}.[ext]`,
-      },
-    },
-  },
 })
