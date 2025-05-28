@@ -10,12 +10,18 @@ export const translations = {
         inflation: "Inflation Rate (%)",
         submit: "Calculate",
         requiredError: "Please fill out this field.",
-        inflationTooHighError: "Inflation rate cannot exceed 100%."
+        inflationTooHighError: "Inflation rate cannot exceed 100%.",
+        negativeAmountError: "Initial amount must be greater than or equal to 0.",
+        negativeInflationError: "Inflation rate must be greater than or equal to 0."
       },
       table: {
         year: "Year",
         purchasingPower: "Purchasing Power",
-        futureValue: "Future Value"
+        futureValue: "Future Value",
+        requiredError: "Please fill out this field.",
+        inflationTooHighError: "Inflation rate cannot exceed 100%.",
+        negativeAmountError: "Initial amount must be greater than or equal to 0.",
+        negativeInflationError: "Inflation rate must be greater than or equal to 0."
       },
       theme: {
         light: "Light",
@@ -35,12 +41,18 @@ export const translations = {
         inflation: "Уровень инфляции (%)",
         submit: "Рассчитать",
         requiredError: "Пожалуйста, заполните это поле.",
-        inflationTooHighError: "Уровень инфляции не может превышать 100%."
+        inflationTooHighError: "Уровень инфляции не может превышать 100%.",
+        negativeAmountError: "Начальная сумма должна быть больше или равна 0.",
+        negativeInflationError: "Уровень инфляции должен быть больше или равен 0."
       },
       table: {
         year: "Год",
         purchasingPower: "Покупательная способность",
-        futureValue: "Будущая стоимость"
+        futureValue: "Будущая стоимость",
+        requiredError: "Пожалуйста, заполните это поле.",
+        inflationTooHighError: "Уровень инфляции не может превышать 100%.",
+        negativeAmountError: "Начальная сумма должна быть больше или равна 0.",
+        negativeInflationError: "Уровень инфляции должен быть больше или равен 0."
       },
       theme: {
         light: "Светлая",

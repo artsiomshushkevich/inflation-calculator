@@ -101,11 +101,22 @@ function InflationCalculator() {
               type="number"
               value={amount}
               onChange={(e) => setAmount(e.target.value)}
-              onInvalid={(e) => e.target.setCustomValidity(t('form.requiredError'))}
+              onInvalid={(e) => {
+                if (e.target.validity.rangeUnderflow) {
+                  e.target.setCustomValidity(t('form.negativeAmountError'));
+                } else if (e.target.validity.valueMissing) {
+                  e.target.setCustomValidity(t('form.requiredError'));
+                } else {
+                  e.target.setCustomValidity('');
+                }
+              }}
               onInput={(e) => e.target.setCustomValidity('')}
               required
               min="0"
               step="0.01"
+              inputMode="decimal"
+              pattern="[0-9]*[.,]?[0-9]*"
+              lang="en"
               aria-label={t("form.amount")}
             />
           </div>
@@ -122,6 +133,8 @@ function InflationCalculator() {
               onInvalid={(e) => {
                 if (e.target.validity.rangeOverflow) {
                   e.target.setCustomValidity(t('form.inflationTooHighError'));
+                } else if (e.target.validity.rangeUnderflow) {
+                  e.target.setCustomValidity(t('form.negativeInflationError'));
                 } else if (e.target.validity.valueMissing) {
                   e.target.setCustomValidity(t('form.requiredError'));
                 } else {
@@ -133,6 +146,9 @@ function InflationCalculator() {
               min="0"
               max="100"
               step="0.01"
+              inputMode="decimal"
+              pattern="[0-9]*[.,]?[0-9]*"
+              lang="en"
               aria-label={t("form.inflation")}
             />
           </div>
