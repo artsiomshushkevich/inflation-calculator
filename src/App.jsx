@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { useTranslation } from "react-i18next"
+import { useTranslation, Trans } from "react-i18next"
 import { ThemeProvider, useTheme } from "./components/theme-provider"
 import { LanguageProvider, useLanguage } from "./components/language-provider"
 import { Button } from "./components/ui/button"
@@ -26,10 +26,10 @@ function Header() {
   const { t } = useTranslation()
 
   return (
-    <header className="flex items-center justify-between p-4 border-b">
-      <div className="flex items-center gap-4">
+    <header className="flex flex-wrap items-center justify-between gap-4 p-4 border-b">
+      <div className="flex flex-wrap items-center gap-4">
         <Select value={theme} onValueChange={setTheme}>
-          <SelectTrigger className="w-[180px]">
+          <SelectTrigger className="w-[140px]">
             <SelectValue placeholder={t("theme.system")} />
           </SelectTrigger>
           <SelectContent>
@@ -40,7 +40,7 @@ function Header() {
         </Select>
 
         <Select value={language} onValueChange={setLanguage}>
-          <SelectTrigger className="w-[180px]">
+          <SelectTrigger className="w-[140px]">
             <SelectValue placeholder="Русский" />
           </SelectTrigger>
           <SelectContent>
@@ -85,7 +85,7 @@ function InflationCalculator() {
       
       <div className="max-w-2xl mx-auto mb-8 text-center text-muted-foreground">
         <p className="mb-4">
-          {t("app.description")}
+          <Trans i18nKey="app.description" />
         </p>
       </div>
 

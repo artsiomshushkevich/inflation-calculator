@@ -1,49 +1,22 @@
 import { createContext, useContext, useEffect, useState } from "react"
 import i18n from "i18next"
 import { initReactI18next } from "react-i18next"
+import { translations } from "../lib/translations"
 
 const LanguageProviderContext = createContext({
   language: "ru",
   setLanguage: () => null,
 })
 
-const resources = {
-  en: {
-    translation: {
-      "app.title": "Inflation Calculator",
-      "form.amount": "Amount",
-      "form.inflation": "Inflation Rate (%)",
-      "form.submit": "Calculate",
-      "table.year": "Year",
-      "table.amount": "Amount",
-      "table.futureValue": "Future Value",
-      "theme.light": "Light",
-      "theme.dark": "Dark",
-      "theme.system": "System",
-    },
-  },
-  ru: {
-    translation: {
-      "app.title": "Калькулятор Инфляции",
-      "form.amount": "Сумма",
-      "form.inflation": "Уровень Инфляции (%)",
-      "form.submit": "Рассчитать",
-      "table.year": "Год",
-      "table.amount": "Сумма",
-      "table.futureValue": "Будущая стоимость",
-      "theme.light": "Светлая",
-      "theme.dark": "Темная",
-      "theme.system": "Системная",
-    },
-  },
-}
-
 i18n.use(initReactI18next).init({
-  resources,
+  resources: translations,
   lng: "ru",
   fallbackLng: "ru",
   interpolation: {
     escapeValue: false,
+  },
+  react: {
+    transKeepBasicHtmlNodesFor: ['br', 'strong', 'i', 'p', 'b'],
   },
 })
 
