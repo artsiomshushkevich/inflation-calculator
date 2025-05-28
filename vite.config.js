@@ -1,14 +1,20 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
-// Generate a random value for each build
-const buildSalt = Date.now().toString() + Math.random().toString(36).substring(2, 10)
+// Generate a unique build identifier (e.g., timestamp)
+const buildId = Date.now().toString()
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
   base: '/inflation-calculator/',
-  define: {
-    __BUILD_SALT__: JSON.stringify(buildSalt),
+  build: {
+    rollupOptions: {
+      output: {
+        entryFileNames: `assets/[name]-${buildId}.js`,
+        chunkFileNames: `assets/[name]-${buildId}.js`,
+        assetFileNames: `assets/[name]-${buildId}.[ext]`,
+      },
+    },
   },
 })
