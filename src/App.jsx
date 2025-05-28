@@ -61,6 +61,7 @@ function InflationCalculator() {
 
   const calculateInflation = (e) => {
     e.preventDefault()
+
     const initialAmount = parseFloat(amount)
     const rate = parseFloat(inflationRate) / 100
     const years = 50
@@ -100,6 +101,8 @@ function InflationCalculator() {
               type="number"
               value={amount}
               onChange={(e) => setAmount(e.target.value)}
+              onInvalid={(e) => e.target.setCustomValidity(t('form.requiredError'))}
+              onInput={(e) => e.target.setCustomValidity('')}
               required
               min="0"
               step="0.01"
@@ -116,6 +119,16 @@ function InflationCalculator() {
               type="number"
               value={inflationRate}
               onChange={(e) => setInflationRate(e.target.value)}
+              onInvalid={(e) => {
+                if (e.target.validity.rangeOverflow) {
+                  e.target.setCustomValidity(t('form.inflationTooHighError'));
+                } else if (e.target.validity.valueMissing) {
+                  e.target.setCustomValidity(t('form.requiredError'));
+                } else {
+                  e.target.setCustomValidity('');
+                }
+              }}
+              onInput={(e) => e.target.setCustomValidity('')}
               required
               min="0"
               max="100"
@@ -130,28 +143,36 @@ function InflationCalculator() {
         </div>
       </form>
 
-      {results.length > 0 && (
-        <div className="overflow-x-auto">
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>{t("table.year")}</TableHead>
-                <TableHead className="text-right">{t("table.purchasingPower")}</TableHead>
-                <TableHead className="text-right">{t("table.futureValue")}</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {results.map(({ year, amount, futureValue }) => (
+      <div className="overflow-x-auto">
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>{t("table.year")}</TableHead>
+              <TableHead className="text-right">{t("table.purchasingPower")}</TableHead>
+              <TableHead className="text-right">{t("table.futureValue")}</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {results.length > 0 ? (
+              results.map(({ year, amount, futureValue }) => (
                 <TableRow key={year}>
                   <TableCell>{year}</TableCell>
                   <TableCell className="text-right">{amount}</TableCell>
                   <TableCell className="text-right">{futureValue}</TableCell>
                 </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </div>
-      )}
+              ))
+            ) : (
+              Array.from({ length: 5 }, (_, i) => (
+                <TableRow key={i} className="opacity-50">
+                  <TableCell>{new Date().getFullYear() + i}</TableCell>
+                  <TableCell className="text-right">-</TableCell>
+                  <TableCell className="text-right">-</TableCell>
+                </TableRow>
+              ))
+            )}
+          </TableBody>
+        </Table>
+      </div>
     </div>
   )
 }

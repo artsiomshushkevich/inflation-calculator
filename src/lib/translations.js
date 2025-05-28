@@ -8,7 +8,9 @@ export const translations = {
       form: {
         amount: "Initial Amount",
         inflation: "Inflation Rate (%)",
-        submit: "Calculate"
+        submit: "Calculate",
+        requiredError: "Please fill out this field.",
+        inflationTooHighError: "Inflation rate cannot exceed 100%."
       },
       table: {
         year: "Year",
@@ -31,7 +33,9 @@ export const translations = {
       form: {
         amount: "Начальная сумма",
         inflation: "Уровень инфляции (%)",
-        submit: "Рассчитать"
+        submit: "Рассчитать",
+        requiredError: "Пожалуйста, заполните это поле.",
+        inflationTooHighError: "Уровень инфляции не может превышать 100%."
       },
       table: {
         year: "Год",
