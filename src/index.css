@@ -75,7 +75,4 @@
     background-color: hsl(var(--background));
     color: hsl(var(--foreground));
   }
-  input {
-    font-size: 1rem;
-  }
 }
