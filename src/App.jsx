@@ -83,6 +83,12 @@ function InflationCalculator() {
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold mb-8 text-center">{t("app.title")}</h1>
       
+      <div className="max-w-2xl mx-auto mb-8 text-center text-muted-foreground">
+        <p className="mb-4">
+          {t("app.description")}
+        </p>
+      </div>
+
       <form onSubmit={calculateInflation} className="max-w-md mx-auto mb-8">
         <div className="space-y-4">
           <div>
@@ -130,7 +136,7 @@ function InflationCalculator() {
             <TableHeader>
               <TableRow>
                 <TableHead>{t("table.year")}</TableHead>
-                <TableHead className="text-right">{t("table.amount")}</TableHead>
+                <TableHead className="text-right">{t("table.purchasingPower")}</TableHead>
                 <TableHead className="text-right">{t("table.futureValue")}</TableHead>
               </TableRow>
             </TableHeader>
