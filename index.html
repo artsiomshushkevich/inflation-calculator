@@ -11,11 +11,30 @@
     <meta property="og:title" content="Inflation Calculator" />
     <meta property="og:description" content="Calculate how inflation affects your money over time. Supports both English and Russian languages." />
     <meta property="og:type" content="website" />
+    <link rel="manifest" href="/inflation-calculator/manifest.json" />
+    <meta name="theme-color" content="#ffffff" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="apple-mobile-web-app-title" content="Inflation Calculator" />
+    <link rel="apple-touch-icon" href="/inflation-calculator/icons/icon-192x192.png" />
     <title>Inflation Calculator | Калькулятор Инфляции</title>
-    <script type="module" crossorigin src="/inflation-calculator/assets/index-1748441909910.js"></script>
-    <link rel="stylesheet" crossorigin href="/inflation-calculator/assets/index-1748441909910.css">
+    <script type="module" crossorigin src="/inflation-calculator/assets/index-1749149744174.js"></script>
+    <link rel="stylesheet" crossorigin href="/inflation-calculator/assets/index-1749149744174.css">
   </head>
   <body>
     <div id="root"></div>
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js')
+            .then(registration => {
+              console.log('ServiceWorker registration successful');
+            })
+            .catch(err => {
+              console.log('ServiceWorker registration failed: ', err);
+            });
+        });
+      }
+    </script>
   </body>
 </html>
