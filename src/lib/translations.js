@@ -27,6 +27,10 @@ export const translations = {
         light: "Light",
         dark: "Dark",
         system: "System"
+      },
+      install: {
+        prompt: "Install this app on your device for quick and easy access when you're on the go.",
+        button: "Install App"
       }
     }
   },
@@ -58,6 +62,10 @@ export const translations = {
         light: "Светлая",
         dark: "Темная",
         system: "Системная"
+      },
+      install: {
+        prompt: "Установите это приложение на ваше устройство для быстрого и удобного доступа в пути.",
+        button: "Установить приложение"
       }
     }
   }

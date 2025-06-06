@@ -4,6 +4,7 @@ import { ThemeProvider, useTheme } from "./components/theme-provider"
 import { LanguageProvider, useLanguage } from "./components/language-provider"
 import { Button } from "./components/ui/button"
 import { Input } from "./components/ui/input"
+import { InstallPrompt } from "./components/install-prompt"
 import {
   Select,
   SelectContent,
@@ -202,6 +203,7 @@ function App() {
           <main>
             <InflationCalculator />
           </main>
+          <InstallPrompt />
         </div>
       </LanguageProvider>
     </ThemeProvider>
