@@ -27,12 +27,12 @@ export function ThemeProvider({
         : "light"
 
       root.classList.add(systemTheme)
-      metaThemeColor?.setAttribute("content", systemTheme === "dark" ? "#000000" : "#ffffff")
+      metaThemeColor?.setAttribute("content", systemTheme === "dark" ? "#020817" : "#ffffff")
       return
     }
 
     root.classList.add(theme)
-    metaThemeColor?.setAttribute("content", theme === "dark" ? "#000000" : "#ffffff")
+    metaThemeColor?.setAttribute("content", theme === "dark" ? "#020817" : "#ffffff")
   }, [theme])
 
   const value = {
