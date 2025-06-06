@@ -5,8 +5,8 @@
   "start_url": "/inflation-calculator/",
   "scope": "/inflation-calculator/",
   "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#000000",
+  "background_color": "#020817",
+  "theme_color": "#020817",
   "icons": [
     {
       "src": "/inflation-calculator/icons/icon-72x72.png",
