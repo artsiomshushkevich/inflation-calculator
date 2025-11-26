@@ -1,6 +1,6 @@
 import { forwardRef, Children, cloneElement, isValidElement } from "react"
 import { cva } from "class-variance-authority"
-import { cn } from "../../../lib/utils"
+import { cn } from "../../../utils"
 
 const buttonVariants = cva(
   "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50",
@@ -31,7 +31,7 @@ const buttonVariants = cva(
   }
 )
 
-const Button = forwardRef(
+export const Button = forwardRef(
   ({ className, variant, size, asChild = false, children, ...props }, ref) => {
     const classes = cn(buttonVariants({ variant, size }), className)
 
@@ -57,6 +57,6 @@ const Button = forwardRef(
 )
 Button.displayName = "Button"
 
-export { Button, buttonVariants }
+export { buttonVariants }
 
 

@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react"
 import i18n from "i18next"
 import { initReactI18next } from "react-i18next"
-import { translations } from "../lib/translations"
+import { translations } from "../../constants"
 
 const LanguageProviderContext = createContext({
   language: "ru",
@@ -20,11 +20,11 @@ i18n.use(initReactI18next).init({
   },
 })
 
-export function LanguageProvider({
+export const LanguageProvider = ({
   children,
   defaultLanguage = "ru",
   storageKey = "vite-ui-language",
-}) {
+}) => {
   const [language, setLanguage] = useState(
     () => localStorage.getItem(storageKey) || defaultLanguage
   )
@@ -55,4 +55,5 @@ export const useLanguage = () => {
     throw new Error("useLanguage must be used within a LanguageProvider")
 
   return context
-} 
+}
+

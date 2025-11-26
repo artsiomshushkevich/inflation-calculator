@@ -5,7 +5,7 @@
 - Use functional components with hooks (useState, useEffect, etc.) exclusively. Avoid class components.
 - Every React component must live in its own folder with a single file named after the component (plus an `index.js` if you need re-exports). Avoid colocating multiple components in one file.
 - Use `forwardRef` for components that need ref forwarding (e.g., form inputs, buttons that need DOM access).
-- Use the `cn` utility function (from `lib/utils.js`) for className merging and conditional classes.
+- Use the `cn` utility function (from `utils/css.js`) for className merging and conditional classes.
 - Prefer composition over configuration when designing component APIs.
 - Use proper prop destructuring and spread props (`{...props}`) to pass through additional props.
 - Set `displayName` for components that use `forwardRef` for better debugging experience.
@@ -27,6 +27,9 @@
 - Export statements should be used right with declarations of functionality:
   - ✅ `export const myFunction = () => { /* ... */ }`
   - ❌ `const myFunction = () => { /* ... */ }; export { myFunction }`
+- Avoid default exports unless absolutely necessary (e.g., for React component entry points like App.jsx). Prefer named exports for better tree-shaking and explicit imports:
+  - ✅ `export const myFunction = () => { /* ... */ }`
+  - ❌ `export default myFunction` (unless necessary for component entry points)
 
 ## Styling
 
@@ -53,8 +56,8 @@
       /otherComponent
     /[feature]      # Feature-specific components
   
-  /utils            # Shared utility functions including working with CSS classes, internationalization, theming
-  /constants         # Application constants
+  /utils            # Shared utility functions including working with CSS classes, internationalization, theming (must have index.js)
+  /constants         # Application constants (must have index.js)
   /hooks             # Custom React hooks
   /...               # Other files in root (App.jsx, main.jsx, etc.)
 ```

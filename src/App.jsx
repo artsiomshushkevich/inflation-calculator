@@ -1,10 +1,10 @@
 import { useState } from "react"
 import { useTranslation, Trans } from "react-i18next"
-import { ThemeProvider, useTheme } from "./components/theme-provider"
-import { LanguageProvider, useLanguage } from "./components/language-provider"
+import { ThemeProvider, useTheme } from "./components/ThemeProvider/ThemeProvider"
+import { LanguageProvider, useLanguage } from "./components/LanguageProvider/LanguageProvider"
 import { Button } from "./components/ui/button"
 import { Input } from "./components/ui/input"
-import { InstallPrompt } from "./components/install-prompt"
+import { InstallPrompt } from "./components/InstallPrompt/InstallPrompt"
 import { Select } from "./components/ui/select"
 import {
   Table,
@@ -15,7 +15,7 @@ import {
   TableRow,
 } from "./components/ui/table"
 
-function Header() {
+const Header = () => {
   const { theme, setTheme } = useTheme()
   const { language, setLanguage } = useLanguage()
   const { t } = useTranslation()
@@ -48,7 +48,7 @@ function Header() {
   )
 }
 
-function InflationCalculator() {
+const InflationCalculator = () => {
   const { t } = useTranslation()
   const [amount, setAmount] = useState("")
   const [inflationRate, setInflationRate] = useState("")
@@ -188,7 +188,7 @@ function InflationCalculator() {
   )
 }
 
-function App() {
+export const App = () => {
   return (
     <ThemeProvider>
       <LanguageProvider>

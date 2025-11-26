@@ -1,7 +1,7 @@
 import { forwardRef } from "react"
-import { cn } from "../../../../lib/utils"
+import { cn } from "../../../../utils"
 
-const TableCell = forwardRef(({ className, ...props }, ref) => (
+export const TableCell = forwardRef(({ className, ...props }, ref) => (
   <td
     ref={ref}
     className={cn(
@@ -13,7 +13,5 @@ const TableCell = forwardRef(({ className, ...props }, ref) => (
 ))
 
 TableCell.displayName = "TableCell"
-
-export { TableCell }
 
 

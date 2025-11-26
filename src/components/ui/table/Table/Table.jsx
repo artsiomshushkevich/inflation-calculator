@@ -1,14 +1,12 @@
 import { forwardRef } from "react"
-import { cn } from "../../../../lib/utils"
+import { cn } from "../../../../utils"
 
-const Table = forwardRef(({ className, ...props }, ref) => (
+export const Table = forwardRef(({ className, ...props }, ref) => (
   <div className="relative w-full overflow-auto">
     <table ref={ref} className={cn("w-full caption-bottom text-sm", className)} {...props} />
   </div>
 ))
 
 Table.displayName = "Table"
-
-export { Table }
 
 

@@ -1,7 +1,7 @@
 import { forwardRef } from "react"
-import { cn } from "../../../../lib/utils"
+import { cn } from "../../../../utils"
 
-const TableRow = forwardRef(({ className, ...props }, ref) => (
+export const TableRow = forwardRef(({ className, ...props }, ref) => (
   <tr
     ref={ref}
     className={cn(
@@ -13,7 +13,5 @@ const TableRow = forwardRef(({ className, ...props }, ref) => (
 ))
 
 TableRow.displayName = "TableRow"
-
-export { TableRow }
 
 

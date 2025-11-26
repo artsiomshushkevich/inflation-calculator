@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Button } from './ui/button'
+import { Button } from '../ui/button'
 
-export function InstallPrompt() {
+export const InstallPrompt = () => {
   const [deferredPrompt, setDeferredPrompt] = useState(null)
   const [showInstallButton, setShowInstallButton] = useState(false)
   const { t } = useTranslation()
@@ -53,4 +53,5 @@ export function InstallPrompt() {
       </Button>
     </div>
   )
-} 
+}
+

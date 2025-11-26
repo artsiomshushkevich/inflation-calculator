@@ -5,11 +5,11 @@ const ThemeProviderContext = createContext({
   setTheme: () => null,
 })
 
-export function ThemeProvider({
+export const ThemeProvider = ({
   children,
   defaultTheme = "system",
   storageKey = "vite-ui-theme",
-}) {
+}) => {
   const [theme, setTheme] = useState(
     () => localStorage.getItem(storageKey) || defaultTheme
   )
@@ -57,4 +57,5 @@ export const useTheme = () => {
     throw new Error("useTheme must be used within a ThemeProvider")
 
   return context
-} 
+}
+
