@@ -1,0 +1,8 @@
+# Cursor Rules
+
+- Do not introduce Radix UI libraries. Build UI primitives locally with React + native HTML and keep dependencies minimal.
+- Every React component must live in its own folder with a single file named after the component (plus an `index.js` if you need re-exports). Avoid colocating multiple components in one file.
+- Keep shared UI grouped under `src/components/ui/<component-name>/`. When adding new UI primitives, follow the existing folder layout and export them through the folder `index.js`.
+- Style replacements should preserve the current visual look-and-feel by reusing the same Tailwind utility classes unless there is a strong reason to change them.
+- Update documentation and dependency listings whenever component libraries are added or removed so the repo stays aligned with these constraints.
+
