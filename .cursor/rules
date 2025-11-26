@@ -1,8 +1,66 @@
 # Cursor Rules
 
-- Do not introduce Radix UI libraries. Build UI primitives locally with React + native HTML and keep dependencies minimal.
-- Every React component must live in its own folder with a single file named after the component (plus an `index.js` if you need re-exports). Avoid colocating multiple components in one file.
-- Keep shared UI grouped under `src/components/ui/<component-name>/`. When adding new UI primitives, follow the existing folder layout and export them through the folder `index.js`.
-- Style replacements should preserve the current visual look-and-feel by reusing the same Tailwind utility classes unless there is a strong reason to change them.
-- Update documentation and dependency listings whenever component libraries are added or removed so the repo stays aligned with these constraints.
+## React Usage
 
+- Use functional components with hooks (useState, useEffect, etc.) exclusively. Avoid class components.
+- Every React component must live in its own folder with a single file named after the component (plus an `index.js` if you need re-exports). Avoid colocating multiple components in one file.
+- Use `forwardRef` for components that need ref forwarding (e.g., form inputs, buttons that need DOM access).
+- Use the `cn` utility function (from `lib/utils.js`) for className merging and conditional classes.
+- Prefer composition over configuration when designing component APIs.
+- Use proper prop destructuring and spread props (`{...props}`) to pass through additional props.
+- Set `displayName` for components that use `forwardRef` for better debugging experience.
+- Keep components focused and single-responsibility. Split complex components into smaller, reusable pieces.
+- Use React 19 features appropriately and follow React best practices.
+- Keep shared UI grouped under `src/components/ui/<component-name>/`. When adding new UI primitives, follow the existing folder layout and export them through the folder `index.js`.
+
+## JavaScript Usage
+
+- Use ES modules (import/export) exclusively. Avoid CommonJS require/module.exports.
+- Always use arrow functions for component definitions, callbacks, utility functions, etc. Avoid function declarations.
+- Use modern JavaScript features (ES2020+): optional chaining (`?.`), nullish coalescing (`??`), template literals, etc.
+- Use destructuring for props, objects, and arrays to improve readability.
+- Use template literals for string interpolation instead of string concatenation.
+- Follow ESLint rules: no unused vars except constants starting with uppercase letters.
+- Use meaningful variable names that clearly describe their purpose.
+- Prefer `const` over `let`, avoid `var` entirely.
+- Use optional chaining (`?.`) and nullish coalescing (`??`) where appropriate for safer code.
+- Export statements should be used right with declarations of functionality:
+  - ✅ `export const myFunction = () => { /* ... */ }`
+  - ❌ `const myFunction = () => { /* ... */ }; export { myFunction }`
+
+## Styling
+
+- Use Tailwind CSS utility classes exclusively. Avoid inline styles or separate CSS files for component styling.
+- Use the `cn` utility function for conditional and merged classNames. This ensures proper class merging and conditional application.
+- Follow the existing color system using CSS variables in HSL format (defined in `tailwind.config.cjs`).
+- Use semantic color names from the theme (primary, secondary, destructive, muted, accent, etc.) instead of hardcoded colors.
+- Support dark mode via the `class` strategy. Ensure components work in both light and dark themes.
+- Preserve existing visual look-and-feel when making style changes by reusing the same Tailwind utility classes unless there is a strong reason to change them.
+- Use responsive utilities (sm:, md:, lg:, xl:, 2xl:) for responsive design patterns.
+- Follow the existing spacing and sizing scale defined in Tailwind's default configuration.
+- Use the existing border radius scale (lg, md, sm) which are calculated from CSS variables.
+
+## Folder Structure and File Naming
+
+### Folder Structure
+
+```
+/src
+  /components
+    /ui              # Shared UI components like button, input, table
+      /button
+      /input
+      /otherComponent
+    /[feature]      # Feature-specific components
+  
+  /utils            # Shared utility functions including working with CSS classes, internationalization, theming
+  /constants         # Application constants
+  /hooks             # Custom React hooks
+  /...               # Other files in root (App.jsx, main.jsx, etc.)
+```
+
+### File Naming
+
+- React components: Use PascalCase for file names (e.g., `Button.jsx`, `TableHeader.jsx`, `InstallPrompt.jsx`).
+- All other functionality (utilities, hooks, constants, etc.): Use camelCase for file names (e.g., `utils.js`, `i18n.js`, `themeProvider.jsx`).
+- Component folders should match the component name in PascalCase.
