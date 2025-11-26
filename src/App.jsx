@@ -5,13 +5,7 @@ import { LanguageProvider, useLanguage } from "./components/language-provider"
 import { Button } from "./components/ui/button"
 import { Input } from "./components/ui/input"
 import { InstallPrompt } from "./components/install-prompt"
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "./components/ui/select"
+import { Select } from "./components/ui/select"
 import {
   Table,
   TableBody,
@@ -29,25 +23,25 @@ function Header() {
   return (
     <header className="flex flex-wrap items-center justify-between gap-4 p-4 border-b">
       <div className="flex flex-wrap items-center gap-4">
-        <Select value={theme} onValueChange={setTheme}>
-          <SelectTrigger className="w-[140px]">
-            <SelectValue placeholder={t("theme.system")} />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="light">{t("theme.light")}</SelectItem>
-            <SelectItem value="dark">{t("theme.dark")}</SelectItem>
-            <SelectItem value="system">{t("theme.system")}</SelectItem>
-          </SelectContent>
+        <Select
+          className="w-[140px]"
+          value={theme}
+          onValueChange={setTheme}
+          aria-label={t("theme.system")}
+        >
+          <option value="light">{t("theme.light")}</option>
+          <option value="dark">{t("theme.dark")}</option>
+          <option value="system">{t("theme.system")}</option>
         </Select>
 
-        <Select value={language} onValueChange={setLanguage}>
-          <SelectTrigger className="w-[140px]">
-            <SelectValue placeholder="Русский" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="en">English</SelectItem>
-            <SelectItem value="ru">Русский</SelectItem>
-          </SelectContent>
+        <Select
+          className="w-[140px]"
+          value={language}
+          onValueChange={setLanguage}
+          aria-label={t("language.label", { defaultValue: "Language" })}
+        >
+          <option value="en">English</option>
+          <option value="ru">Русский</option>
         </Select>
       </div>
     </header>
