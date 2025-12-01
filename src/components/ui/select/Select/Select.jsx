@@ -1,8 +1,8 @@
-import { forwardRef } from "react"
-import { cn } from "../../../../utils"
+import { forwardRef } from 'react';
+import { cn } from '../../../../utils';
 
 const baseSelectClasses =
-  "flex h-9 w-full appearance-none rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground shadow-sm transition focus:outline-none focus:ring-1 focus:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
+  'flex h-9 w-full appearance-none rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground shadow-sm transition focus:outline-none focus:ring-1 focus:ring-ring disabled:cursor-not-allowed disabled:opacity-50';
 
 export const Select = forwardRef(
   (
@@ -19,21 +19,21 @@ export const Select = forwardRef(
     },
     ref
   ) => {
-    const controlled = value !== undefined
+    const controlled = value !== undefined;
 
     const selectProps = {
       ...(controlled
-        ? { value: value ?? "" }
-        : { defaultValue: defaultValue ?? (placeholder ? "" : undefined) }),
-    }
+        ? { value: value ?? '' }
+        : { defaultValue: defaultValue ?? (placeholder ? '' : undefined) }),
+    };
 
     const handleChange = (event) => {
-      onChange?.(event)
-      onValueChange?.(event.target.value)
-    }
+      onChange?.(event);
+      onValueChange?.(event.target.value);
+    };
 
     return (
-      <div className={cn("relative w-full", className)}>
+      <div className={cn('relative w-full', className)}>
         <select
           ref={ref}
           className={cn(baseSelectClasses, selectClassName)}
@@ -64,9 +64,8 @@ export const Select = forwardRef(
           <path d="m6 9 6 6 6-6" />
         </svg>
       </div>
-    )
+    );
   }
-)
+);
 
-Select.displayName = "Select"
-
+Select.displayName = 'Select';

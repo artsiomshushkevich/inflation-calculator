@@ -1,10 +1,8 @@
-import { forwardRef } from "react"
-import { cn } from "../../../../utils"
+import { forwardRef } from 'react';
+import { cn } from '../../../../utils';
 
 export const TableHeader = forwardRef(({ className, ...props }, ref) => (
-  <thead ref={ref} className={cn("[&_tr]:border-b", className)} {...props} />
-))
+  <thead ref={ref} className={cn('[&_tr]:border-b', className)} {...props} />
+));
 
-TableHeader.displayName = "TableHeader"
-
-
+TableHeader.displayName = 'TableHeader';

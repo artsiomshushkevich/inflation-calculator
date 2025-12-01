@@ -1,16 +1,14 @@
-import i18n from 'i18next'
-import { initReactI18next } from 'react-i18next'
-import { translations } from '../constants'
+import i18n from 'i18next';
+import { initReactI18next } from 'react-i18next';
+import { translations } from '../constants';
 
-i18n
-  .use(initReactI18next)
-  .init({
-    resources: translations,
-    lng: 'en',
-    fallbackLng: 'en',
-    interpolation: {
-      escapeValue: false
-    }
-  })
+i18n.use(initReactI18next).init({
+  resources: translations,
+  lng: 'en',
+  fallbackLng: 'en',
+  interpolation: {
+    escapeValue: false,
+  },
+});
 
-export { i18n }
+export { i18n };

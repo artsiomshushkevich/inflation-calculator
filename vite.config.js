@@ -1,18 +1,18 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
-import fs from 'fs'
-import path from 'path'
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import fs from 'fs';
+import path from 'path';
 
 // Generate a unique build identifier (e.g., timestamp)
-const buildId = Date.now().toString()
+const buildId = Date.now().toString();
 
 // Write buildId to public/build-id.txt for use in service worker
-const buildIdPath = path.resolve('public/build-id.txt')
-fs.writeFileSync(buildIdPath, buildId)
+const buildIdPath = path.resolve('public/build-id.txt');
+fs.writeFileSync(buildIdPath, buildId);
 
 // https://vitejs.dev/config/
 export default defineConfig(({ command }) => {
-  const base = command === 'build' ? '/inflation-calculator/' : '/'
+  const base = command === 'build' ? '/inflation-calculator/' : '/';
 
   return {
     plugins: [react()],
@@ -26,5 +26,5 @@ export default defineConfig(({ command }) => {
         },
       },
     },
-  }
-})
+  };
+});
