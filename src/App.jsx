@@ -8,10 +8,10 @@ import {
   LanguageProvider,
   useLanguage,
 } from './components/LanguageProvider/LanguageProvider';
-import { Button } from './components/ui/button/Button';
-import { Input } from './components/ui/input/Input';
+import { Button } from './components/ui/Button/Button';
+import { Input } from './components/ui/Input/Input';
 import { InstallPrompt } from './components/InstallPrompt/InstallPrompt';
-import { Select } from './components/ui/select/Select/Select';
+import { Select } from './components/ui/Select/Select/Select';
 import { SkipLink } from './components/SkipLink/SkipLink';
 import {
   Table,
@@ -21,7 +21,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from './components/ui/table';
+} from './components/ui/Table';
 
 const Header = () => {
   const { theme, setTheme } = useTheme();
