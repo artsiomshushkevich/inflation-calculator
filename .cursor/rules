@@ -31,6 +31,20 @@
   - ✅ `export const myFunction = () => { /* ... */ }`
   - ❌ `export default myFunction` (unless necessary for component entry points)
 
+## Code Style Standards
+
+- **Curly Brackets for Control Statements**: Always use curly brackets for all control statements (if, else, for, while, try, etc.), even if the block contains only a single statement:
+  - ❌ `if (!deferredPrompt) return;`
+  - ✅ `if (!deferredPrompt) { return; }`
+- **Comments**: Only add comments when there's tricky or non-obvious logic. Avoid comments that merely restate what the code does. Code should be self-descriptive:
+  - ❌ `// Increment the counter by one` followed by `counter++;`
+  - ✅ `// Adjusting for zero-based index` when the logic is non-obvious
+- **Spacing**: Always add empty lines between code blocks to improve readability. Separate logical sections with blank lines:
+  - ✅ Separate function definitions, component definitions, and logical code blocks with blank lines
+- **NPM Packages**: Use only production-ready, stable NPM packages. Never use alpha, beta, insiders, or other pre-release versions in production code:
+  - ❌ `"@tailwindcss/nesting": "^0.0.0-insiders.565cd3e"`
+  - ✅ Use stable versions only
+
 ## Styling
 
 - Use Tailwind CSS utility classes exclusively. Avoid inline styles or separate CSS files for component styling.
