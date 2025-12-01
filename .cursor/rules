@@ -3,7 +3,7 @@
 ## React Usage
 
 - Use functional components with hooks (useState, useEffect, etc.) exclusively. Avoid class components.
-- Every React component must live in its own folder with a single file named after the component (plus an `index.js` if you need re-exports). Avoid colocating multiple components in one file.
+- Every React component must live in its own folder with a single file named after the component. Use `index.js` only for components that have multiple inner sub-components (e.g., Table with TableHeader, TableBody, TableFooter, etc.). Simple components without inner components should not have `index.js` files - import them directly from the component file. Avoid colocating multiple components in one file.
 - Use `forwardRef` for components that need ref forwarding (e.g., form inputs, buttons that need DOM access).
 - Use the `cn` utility function (from `utils/css.js`) for className merging and conditional classes.
 - Prefer composition over configuration when designing component APIs.
@@ -11,7 +11,7 @@
 - Set `displayName` for components that use `forwardRef` for better debugging experience.
 - Keep components focused and single-responsibility. Split complex components into smaller, reusable pieces.
 - Use React 19 features appropriately and follow React best practices.
-- Keep shared UI grouped under `src/components/ui/<component-name>/`. When adding new UI primitives, follow the existing folder layout and export them through the folder `index.js`.
+- Keep shared UI grouped under `src/components/ui/<component-name>/`. When adding new UI primitives, follow the existing folder layout. Only use `index.js` for components with multiple inner sub-components (like Table). Simple components should be imported directly from their component file (e.g., `Button.jsx`).
 
 ## JavaScript Usage
 

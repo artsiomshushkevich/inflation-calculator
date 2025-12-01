@@ -2,10 +2,10 @@ import { useState } from "react"
 import { useTranslation, Trans } from "react-i18next"
 import { ThemeProvider, useTheme } from "./components/ThemeProvider/ThemeProvider"
 import { LanguageProvider, useLanguage } from "./components/LanguageProvider/LanguageProvider"
-import { Button } from "./components/ui/button"
-import { Input } from "./components/ui/input"
+import { Button } from "./components/ui/button/Button"
+import { Input } from "./components/ui/input/Input"
 import { InstallPrompt } from "./components/InstallPrompt/InstallPrompt"
-import { Select } from "./components/ui/select"
+import { Select } from "./components/ui/select/Select/Select"
 import {
   Table,
   TableBody,
