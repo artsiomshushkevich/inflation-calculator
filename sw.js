@@ -1,6 +1,8 @@
 async function getBuildId() {
   try {
-    const response = await fetch('/inflation-calculator/build-id.txt', { cache: 'no-store' });
+    const response = await fetch('/inflation-calculator/build-id.txt', {
+      cache: 'no-store',
+    });
     if (response.ok) {
       return await response.text();
     }
@@ -32,7 +34,7 @@ self.addEventListener('install', (event) => {
         `${BASE_PATH}/icons/icon-384x384.png`,
         `${BASE_PATH}/icons/icon-512x512.png`,
         `${BASE_PATH}/build-id.txt`,
-        `${BASE_PATH}/404.html`
+        `${BASE_PATH}/404.html`,
       ]);
     })()
   );
@@ -40,29 +42,27 @@ self.addEventListener('install', (event) => {
 
 self.addEventListener('fetch', (event) => {
   const url = new URL(event.request.url);
-  
+
   // Handle root path requests when launched from home screen
   if (url.pathname === '/' || url.pathname === '/index.html') {
     event.respondWith(
-      caches.match(`${BASE_PATH}/index.html`)
-        .then((response) => {
-          if (response) {
-            return response;
-          }
-          return fetch(event.request);
-        })
+      caches.match(`${BASE_PATH}/index.html`).then((response) => {
+        if (response) {
+          return response;
+        }
+        return fetch(event.request);
+      })
     );
     return;
   }
 
   // Handle all other requests
   event.respondWith(
-    caches.match(event.request)
-      .then((response) => {
-        if (response) {
-          return response;
-        }
-        return fetch(event.request);
-      })
+    caches.match(event.request).then((response) => {
+      if (response) {
+        return response;
+      }
+      return fetch(event.request);
+    })
   );
-}); 
+});
