@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useTranslation, Trans } from 'react-i18next';
 import {
   ThemeProvider,
@@ -12,10 +12,12 @@ import { Button } from './components/ui/button/Button';
 import { Input } from './components/ui/input/Input';
 import { InstallPrompt } from './components/InstallPrompt/InstallPrompt';
 import { Select } from './components/ui/select/Select/Select';
+import { SkipLink } from './components/SkipLink/SkipLink';
 import {
   Table,
   TableBody,
   TableCell,
+  TableCaption,
   TableHead,
   TableHeader,
   TableRow,
@@ -59,6 +61,12 @@ const InflationCalculator = () => {
   const [amount, setAmount] = useState('');
   const [inflationRate, setInflationRate] = useState('');
   const [results, setResults] = useState([]);
+  const [amountError, setAmountError] = useState('');
+  const [inflationError, setInflationError] = useState('');
+  const [lastCalculation, setLastCalculation] = useState({
+    initialAmount: null,
+    inflationRate: null,
+  });
 
   const calculateInflation = (e) => {
     e.preventDefault();
@@ -79,7 +87,38 @@ const InflationCalculator = () => {
     });
 
     setResults(newResults);
+    setAmountError('');
+    setInflationError('');
+    setLastCalculation({
+      initialAmount: initialAmount,
+      inflationRate: parseFloat(inflationRate),
+    });
   };
+
+  useEffect(() => {
+    const liveRegion = document.getElementById('live-region');
+    if (
+      liveRegion &&
+      results.length > 0 &&
+      lastCalculation.initialAmount !== null
+    ) {
+      const announcement = t('table.resultsAnnouncement', {
+        defaultValue: `Calculation complete for initial amount ${lastCalculation.initialAmount} with inflation rate ${lastCalculation.inflationRate}%. Showing ${results.length} years of results.`,
+        count: results.length,
+        initialAmount: lastCalculation.initialAmount.toLocaleString(),
+        inflationRate: lastCalculation.inflationRate,
+      })
+        .replace('{{count}}', results.length)
+        .replace(
+          '{{initialAmount}}',
+          lastCalculation.initialAmount.toLocaleString()
+        )
+        .replace('{{inflationRate}}', lastCalculation.inflationRate.toString());
+      liveRegion.textContent = announcement;
+    } else if (liveRegion) {
+      liveRegion.textContent = '';
+    }
+  }, [results, lastCalculation, t]);
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -87,7 +126,15 @@ const InflationCalculator = () => {
 
       <div className="max-w-2xl mx-auto mb-8 text-center text-muted-foreground">
         <p className="mb-4">
-          <Trans i18nKey="app.description" />
+          <span aria-hidden="true">
+            <Trans
+              i18nKey="app.description"
+              components={{
+                strong: <span className="font-bold" />,
+              }}
+            />
+          </span>
+          <span className="sr-only">{t('app.descriptionPlain')}</span>
         </p>
       </div>
 
@@ -101,17 +148,28 @@ const InflationCalculator = () => {
               id="amount"
               type="number"
               value={amount}
-              onChange={(e) => setAmount(e.target.value)}
+              onChange={(e) => {
+                setAmount(e.target.value);
+                setAmountError('');
+              }}
               onInvalid={(e) => {
                 if (e.target.validity.rangeUnderflow) {
-                  e.target.setCustomValidity(t('form.negativeAmountError'));
+                  const error = t('form.negativeAmountError');
+                  e.target.setCustomValidity(error);
+                  setAmountError(error);
                 } else if (e.target.validity.valueMissing) {
-                  e.target.setCustomValidity(t('form.requiredError'));
+                  const error = t('form.requiredError');
+                  e.target.setCustomValidity(error);
+                  setAmountError(error);
                 } else {
                   e.target.setCustomValidity('');
+                  setAmountError('');
                 }
               }}
-              onInput={(e) => e.target.setCustomValidity('')}
+              onInput={(e) => {
+                e.target.setCustomValidity('');
+                setAmountError('');
+              }}
               required
               min="0"
               step="0.01"
@@ -119,7 +177,19 @@ const InflationCalculator = () => {
               pattern="[0-9]*[.,]?[0-9]*"
               lang="en"
               aria-label={t('form.amount')}
+              aria-invalid={amountError ? 'true' : 'false'}
+              aria-describedby={amountError ? 'amount-error' : undefined}
             />
+            {amountError && (
+              <div
+                id="amount-error"
+                role="alert"
+                className="mt-1 text-sm text-destructive"
+                aria-live="polite"
+              >
+                {amountError}
+              </div>
+            )}
           </div>
 
           <div>
@@ -130,19 +200,32 @@ const InflationCalculator = () => {
               id="inflation"
               type="number"
               value={inflationRate}
-              onChange={(e) => setInflationRate(e.target.value)}
+              onChange={(e) => {
+                setInflationRate(e.target.value);
+                setInflationError('');
+              }}
               onInvalid={(e) => {
                 if (e.target.validity.rangeOverflow) {
-                  e.target.setCustomValidity(t('form.inflationTooHighError'));
+                  const error = t('form.inflationTooHighError');
+                  e.target.setCustomValidity(error);
+                  setInflationError(error);
                 } else if (e.target.validity.rangeUnderflow) {
-                  e.target.setCustomValidity(t('form.negativeInflationError'));
+                  const error = t('form.negativeInflationError');
+                  e.target.setCustomValidity(error);
+                  setInflationError(error);
                 } else if (e.target.validity.valueMissing) {
-                  e.target.setCustomValidity(t('form.requiredError'));
+                  const error = t('form.requiredError');
+                  e.target.setCustomValidity(error);
+                  setInflationError(error);
                 } else {
                   e.target.setCustomValidity('');
+                  setInflationError('');
                 }
               }}
-              onInput={(e) => e.target.setCustomValidity('')}
+              onInput={(e) => {
+                e.target.setCustomValidity('');
+                setInflationError('');
+              }}
               required
               min="0"
               max="100"
@@ -151,7 +234,19 @@ const InflationCalculator = () => {
               pattern="[0-9]*[.,]?[0-9]*"
               lang="en"
               aria-label={t('form.inflation')}
+              aria-invalid={inflationError ? 'true' : 'false'}
+              aria-describedby={inflationError ? 'inflation-error' : undefined}
             />
+            {inflationError && (
+              <div
+                id="inflation-error"
+                role="alert"
+                className="mt-1 text-sm text-destructive"
+                aria-live="polite"
+              >
+                {inflationError}
+              </div>
+            )}
           </div>
 
           <Button type="submit" className="w-full">
@@ -162,13 +257,19 @@ const InflationCalculator = () => {
 
       <div className="overflow-x-auto">
         <Table>
+          <TableCaption>
+            {t('table.caption', {
+              defaultValue:
+                'Inflation calculation results showing purchasing power and future value over time',
+            })}
+          </TableCaption>
           <TableHeader>
             <TableRow>
-              <TableHead>{t('table.year')}</TableHead>
-              <TableHead className="text-right">
+              <TableHead scope="col">{t('table.year')}</TableHead>
+              <TableHead scope="col" className="text-right">
                 {t('table.purchasingPower')}
               </TableHead>
-              <TableHead className="text-right">
+              <TableHead scope="col" className="text-right">
                 {t('table.futureValue')}
               </TableHead>
             </TableRow>
@@ -196,17 +297,30 @@ const InflationCalculator = () => {
   );
 };
 
+const AppContent = () => {
+  const { language } = useLanguage();
+
+  useEffect(() => {
+    document.documentElement.lang = language;
+  }, [language]);
+
+  return (
+    <div className="min-h-screen bg-background text-foreground">
+      <SkipLink />
+      <Header />
+      <main id="main-content">
+        <InflationCalculator />
+      </main>
+      <InstallPrompt />
+    </div>
+  );
+};
+
 export const App = () => {
   return (
     <ThemeProvider>
       <LanguageProvider>
-        <div className="min-h-screen bg-background text-foreground">
-          <Header />
-          <main>
-            <InflationCalculator />
-          </main>
-          <InstallPrompt />
-        </div>
+        <AppContent />
       </LanguageProvider>
     </ThemeProvider>
   );

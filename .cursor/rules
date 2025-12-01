@@ -57,6 +57,119 @@
 - Follow the existing spacing and sizing scale defined in Tailwind's default configuration.
 - Use the existing border radius scale (lg, md, sm) which are calculated from CSS variables.
 
+## Accessibility (WCAG 2.2 Level A & AA)
+
+All code must comply with WCAG 2.2 Level A and AA standards. Follow these guidelines for all generated code:
+
+### Semantic HTML
+
+- Use proper HTML5 semantic elements: `<header>`, `<nav>`, `<main>`, `<article>`, `<section>`, `<aside>`, `<footer>`
+- Use appropriate heading hierarchy (h1 → h2 → h3, etc.) without skipping levels
+- Use landmark regions to help screen readers navigate (header, main, nav, etc.)
+- Prefer semantic HTML elements over ARIA when possible (e.g., use `<button>` instead of `<div role="button">`)
+
+### ARIA Attributes
+
+- Use `aria-label` for interactive elements without visible text labels
+- Use `aria-labelledby` to reference visible label text by ID
+- Use `aria-describedby` to associate descriptions, hints, or error messages with form controls
+- Use `aria-live` regions (polite or assertive) for dynamic content updates that should be announced
+- Use `aria-hidden="true"` for decorative images and icons that don't convey meaning
+- Use `role` attributes only when semantic HTML isn't sufficient
+- Use `aria-invalid="true"` on form controls with validation errors
+- Use `aria-required="true"` for required form fields (in addition to the `required` attribute)
+
+### Form Accessibility
+
+- **All form inputs MUST have associated labels** using one of these methods:
+  - `<label htmlFor="inputId">` with matching `id` on input (preferred)
+  - `aria-label` on the input element
+  - `aria-labelledby` pointing to a visible label element
+- Error messages MUST be programmatically associated with inputs using `aria-describedby`
+- Provide clear, descriptive error messages that explain what went wrong and how to fix it
+- Use `aria-invalid="true"` on inputs with validation errors
+- Ensure form validation feedback is announced to screen readers
+
+### Keyboard Navigation
+
+- All interactive elements MUST be keyboard accessible (buttons, links, form controls, custom widgets)
+- Maintain logical tab order (left-to-right, top-to-bottom)
+- Ensure focus indicators are visible and meet contrast requirements (minimum 2:1 contrast ratio)
+- Implement proper focus management for modals, dialogs, and dynamic content
+- Provide skip navigation links for keyboard users to bypass repetitive content
+- Ensure custom interactive components support keyboard events (Enter, Space, Arrow keys where appropriate)
+- Never remove focus indicators with CSS (`outline: none` without providing alternative focus styles)
+
+### Focus Indicators
+
+- All focusable elements MUST have visible focus indicators
+- Focus indicators must have a minimum 2:1 contrast ratio against adjacent colors
+- Use `focus-visible:outline` or `focus-visible:ring` classes in Tailwind for focus styles
+- Ensure focus indicators are at least 2px wide
+- Never hide focus indicators completely
+
+### Color Contrast
+
+- Normal text (under 18pt or 14pt bold) must have a 4.5:1 contrast ratio against background
+- Large text (18pt+ or 14pt+ bold) must have a 3:1 contrast ratio against background
+- Interactive elements (buttons, links) must meet the same contrast requirements as text
+- Don't rely solely on color to convey information (use icons, text, or patterns in addition)
+
+### Images and Icons
+
+- All images MUST have descriptive `alt` text that conveys the image's purpose
+- Decorative images (icons, illustrations that don't add meaning) MUST use `aria-hidden="true"` and empty or no `alt` attribute
+- Icons used as buttons or links must have `aria-label` describing their action
+- Background images that convey information must have alternative text provided
+
+### Tables
+
+- Use `<caption>` or `aria-label` to describe table purpose
+- Use `scope="col"` or `scope="row"` on `<th>` elements to associate headers with cells
+- For complex tables, use `aria-labelledby` or `aria-describedby` to provide additional context
+- Ensure table structure is logical and headers are properly associated with data cells
+
+### Language
+
+- Set the `lang` attribute on the `<html>` element to match the current application language
+- Use `lang` attribute on specific elements when content language differs from page language
+- Update the `lang` attribute dynamically when language changes
+
+### Skip Links
+
+- Provide skip navigation links for keyboard users to jump to main content
+- Skip links should be visible on focus and positioned early in the DOM
+- Use appropriate styling to make skip links accessible but unobtrusive
+
+### Live Regions
+
+- Use `aria-live="polite"` for non-urgent updates (e.g., search results, status messages)
+- Use `aria-live="assertive"` only for urgent, time-sensitive updates
+- Use `role="status"` or `role="alert"` for appropriate live region semantics
+- Ensure live regions are present in the DOM before content updates
+
+### Error Handling
+
+- Associate all error messages with form controls using `aria-describedby`
+- Use `aria-invalid="true"` on inputs with validation errors
+- Provide clear, actionable error messages
+- Ensure error messages are announced to screen readers when they appear
+
+### Modals and Dialogs
+
+- Use `role="dialog"` or the native `<dialog>` element
+- Provide `aria-label` or `aria-labelledby` for dialog titles
+- Implement focus trap within modals (focus should not escape the modal)
+- Return focus to the triggering element when modal closes
+- Support ESC key to close modals
+- Provide a visible close button with proper labeling
+
+### Dynamic Content
+
+- Announce important dynamic content updates using `aria-live` regions
+- Ensure focus management when content changes dynamically
+- Provide loading states and status updates for async operations
+
 ## Folder Structure and File Naming
 
 ### Folder Structure
